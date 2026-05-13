@@ -1,0 +1,562 @@
+/* Student Form - Google Forms Style */
+
+.student-form-container {
+  padding: 0;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-header h1 {
+  color: #000;
+  font-size: 36px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.form-header p {
+  color: #333;
+  font-size: 15px;
+}
+
+/* Progress Indicator */
+.progress-container {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #e74c3c;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  align-items: flex-start;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-step::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: calc(50% + 20px);
+  right: -50%;
+  height: 2px;
+  background: #ecf0f1;
+  z-index: 0;
+}
+
+.progress-step:last-child::before {
+  display: none;
+}
+
+.progress-step.completed::before {
+  background: #27ae60;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ecf0f1;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s;
+}
+
+.progress-step.active .step-number {
+  background: #e74c3c;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.progress-step.completed .step-number {
+  background: #27ae60;
+  color: white;
+}
+
+.step-label {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #000;
+  text-align: center;
+  max-width: 120px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.progress-step.active .step-label {
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+/* Form Content */
+.form-content {
+  max-width: 850px;
+  margin: 0 auto 50px;
+}
+
+.form-card {
+  background: white;
+  padding: 45px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #e74c3c;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.form-section h2 {
+  color: #2c3e50;
+  font-size: 28px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.section-description {
+  color: #2c3e50;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.subsection-title {
+  color: #2c3e50;
+  font-size: 20px;
+  margin: 30px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #d0c3b0;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.form-input,
+.form-select,
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #d0c3b0;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: all 0.3s;
+  font-family: inherit;
+  background-color: #fafaf8;
+  box-sizing: border-box;
+  color: #2c3e50;
+  line-height: 1.5;
+}
+
+.form-input:focus,
+.form-select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #e74c3c;
+  background-color: white;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.2);
+}
+
+.form-hint {
+  display: block;
+  margin-top: 6px;
+  color: #2c3e50;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Checkbox */
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  font-size: 15px;
+  color: #2c3e50;
+  font-weight: 500;
+  line-height: 1.5;
+  gap: 8px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: #e74c3c;
+  flex-shrink: 0;
+}
+
+.checkbox-label span {
+  font-weight: 500;
+}
+
+/* Dynamic Sections (for multiple relatives/siblings) */
+.dynamic-section {
+  background: #f5f1e8;
+  padding: 24px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border-left: 4px solid #e74c3c;
+}
+
+.dynamic-section h3 {
+  color: #e74c3c;
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.btn-secondary {
+  background: #95a5a6;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Action Buttons (Add/Remove Sibling/Contact) */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.action-buttons .btn {
+  padding: 12px 24px;
+}
+
+/* Navigation Buttons */
+.form-nav-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid #d0c3b0;
+}
+
+.form-nav-buttons .btn {
+  min-width: 120px;
+  padding: 14px 28px;
+}
+
+.form-nav-buttons .btn-primary {
+  margin-left: auto;
+}
+
+/* Error Message */
+.error-message {
+  background: #fadbd8;
+  color: #a93226;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border-left: 4px solid #e74c3c;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+/* Optional Note */
+.optional-note {
+  background: #d6eaf8;
+  border-left: 4px solid #3498db;
+  padding: 16px;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+
+.optional-note p {
+  margin: 0;
+  color: #1b4965;
+  font-size: 14px;
+}
+
+/* Success Message */
+.success-container {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: #27ae60;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  margin: 0 auto 30px;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.success-container h2 {
+  color: #27ae60;
+  font-size: 32px;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.success-container p {
+  color: #7f8c8d;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .form-card {
+    padding: 30px 20px;
+  }
+
+  .form-header h1 {
+    font-size: 26px;
+  }
+
+  .form-nav-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-nav-buttons .btn {
+    width: 100%;
+  }
+
+  .form-nav-buttons .btn-primary {
+    margin-left: 0;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons .btn {
+    width: 100%;
+  }
+}
+
+/* Parent Section Styles */
+.parent-section {
+  background: #f5f1e8;
+  padding: 24px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border-left: 4px solid #e74c3c;
+}
+
+.parent-section .subsection-title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #d0c3b0;
+  padding-bottom: 12px;
+  color: #2c3e50;
+}
+
+/* Guardian Section Styles */
+.guardian-section {
+  background: #ecf0f1;
+  padding: 16px;
+  border-radius: 6px;
+  margin: 30px 0 20px;
+  border-left: 4px solid #3498db;
+}
+
+/* Student Dashboard View */
+.dashboard-view-card {
+  border-top-color: #2c3e50;
+}
+
+.dashboard-title {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #1f2d3d;
+}
+
+.dashboard-status-message {
+  background: #e7f8ef;
+  border: 1px solid #b9e9ca;
+  color: #17643f;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.dashboard-section {
+  margin-bottom: 26px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fcfcfd;
+}
+
+.dashboard-section h3 {
+  margin: 0 0 14px;
+  color: #22303e;
+  font-size: 20px;
+}
+
+.dashboard-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.dashboard-detail-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+  background: white;
+}
+
+.dashboard-detail-card h4 {
+  margin: 0 0 12px;
+  color: #334155;
+  font-size: 16px;
+}
+
+.dashboard-field-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.dashboard-field-row {
+  display: grid;
+  grid-template-columns: minmax(130px, 180px) 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.dashboard-label {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dashboard-value {
+  color: #1e293b;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+.dashboard-empty {
+  margin: 0;
+  color: #64748b;
+  font-style: italic;
+}
+
+.dashboard-actions {
+  margin-top: 26px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-field-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

@@ -1,0 +1,26 @@
+.psg-footer {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  border-top: 3px solid #e74c3c;
+  height: auto;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-content p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .psg-footer {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,6 @@
+#!/home/dronelab-03/Downloads/ProConnect_final-main/ProConnect-Backend/.venv/bin/python
+import sys
+from flask.cli import main
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(main())

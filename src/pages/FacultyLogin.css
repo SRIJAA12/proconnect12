@@ -1,0 +1,265 @@
+/* Faculty Login Page Styles */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.login-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  padding: 50px;
+  width: 100%;
+  max-width: 500px;
+  border-top: 5px solid #e74c3c;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-header h1 {
+  color: #2c3e50;
+  font-size: 32px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.login-header p {
+  color: #7f8c8d;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #d0c3b0;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  background-color: #fafaf8;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #e74c3c;
+  background-color: white;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.2);
+}
+
+.btn-full {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-full:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+}
+
+.error-message {
+  background-color: #fadbd8;
+  color: #a93226;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border-left: 4px solid #e74c3c;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.login-footer p {
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.link {
+  color: #e74c3c;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.link:hover {
+  color: #c0392b;
+  text-decoration: underline;
+}
+
+/* Forgot Password Link */
+.forgot-password-link {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: -5px;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: #c0392b;
+  text-decoration: underline;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  max-width: 420px;
+  width: 90%;
+  border-top: 5px solid #e74c3c;
+}
+
+.modal-content h2 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.modal-subtitle {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.btn-reset {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 15px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-reset:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+}
+
+.btn-cancel {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 10px;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background-color: #d5dbdb;
+}
+
+.reset-success-message {
+  color: #27ae60;
+  background-color: #d5f4e6;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border-left: 4px solid #27ae60;
+  font-size: 14px;
+  margin-bottom: 15px;
+  margin-top: -5px;
+}
+
+.reset-error-message {
+  color: #a93226;
+  background-color: #fadbd8;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border-left: 4px solid #e74c3c;
+  font-size: 14px;
+  margin-bottom: 15px;
+  margin-top: -5px;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 20px 15px;
+    min-height: auto;
+  }
+
+  .login-card {
+    padding: 30px 25px;
+  }
+
+  .login-header h1 {
+    font-size: 26px;
+  }
+
+  .modal-content {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+}

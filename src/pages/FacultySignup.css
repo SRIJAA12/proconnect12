@@ -1,0 +1,146 @@
+/* Faculty Signup Page Styles */
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.signup-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  padding: 50px;
+  width: 100%;
+  max-width: 550px;
+  border-top: 5px solid #e74c3c;
+}
+
+.signup-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.signup-header h1 {
+  color: #2c3e50;
+  font-size: 32px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.signup-header p {
+  color: #7f8c8d;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #d0c3b0;
+  border-radius: 6px;
+  font-size: 15px;
+  background-color: #fafaf8;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #e74c3c;
+  background-color: white;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.2);
+}
+
+.form-hint {
+  display: block;
+  margin-top: 6px;
+  color: #95a5a6;
+  font-size: 13px;
+}
+
+.error-message {
+  background-color: #fadbd8;
+  color: #a93226;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border-left: 4px solid #e74c3c;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.btn-full {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-full:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+}
+
+.signup-footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.signup-footer p {
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.link {
+  color: #e74c3c;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.link:hover {
+  color: #c0392b;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .signup-container {
+    padding: 20px 15px;
+    min-height: auto;
+  }
+
+  .signup-card {
+    padding: 30px 25px;
+  }
+
+  .signup-header h1 {
+    font-size: 26px;
+  }
+}

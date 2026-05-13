@@ -1,0 +1,171 @@
+/* App wrapper with full height layout */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+  background: linear-gradient(135deg, #e8dcc8 0%, #f5f1e8 100%);
+  padding: 40px 20px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    padding: 25px 15px;
+  }
+}
+
+/* Container for centering content */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Common button styles */
+.btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.btn-secondary {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.form-input,
+.form-select,
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #d0c3b0;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #e74c3c;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.2);
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  background-color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab-button {
+  flex: 1;
+  padding: 16px 20px;
+  border: none;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-button.active {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.tab-button:hover:not(.active) {
+  background-color: #e8dcc8;
+}
+
+/* Card styles */
+.card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Alert styles */
+.alert {
+  padding: 15px 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.alert-error {
+  background-color: #fadbd8;
+  color: #a93226;
+  border-left: 4px solid #e74c3c;
+}
+
+.alert-success {
+  background-color: #d5f4e6;
+  color: #186a3b;
+  border-left: 4px solid #27ae60;
+}
+
+.alert-info {
+  background-color: #d6eaf8;
+  color: #1b4965;
+  border-left: 4px solid #3498db;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+}
