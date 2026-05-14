@@ -281,17 +281,9 @@ function FacultyDashboard() {
           ? raw.relatives
           : (raw?.relatives_in_it?.relatives_list || []);
 
-        const derivedName = (() => {
-          const emailSource = basicInfo.college_mail || raw?.collegeMail || raw?.email || '';
-          const localPart = (emailSource.split('@')[0] || '').replace(/[._-]+/g, ' ').trim();
-          return localPart
-            ? localPart.split(/\s+/).map((part: string) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
-            : '';
-        })();
-
         return {
           id: raw?._id || raw?.id || '',
-          studentName: basicInfo.student_name || raw?.studentName || raw?.name || derivedName || basicInfo.roll_number || raw?.rollNumber || '',
+          studentName: basicInfo.student_name || raw?.studentName || '',
           mobileNo: basicInfo.mobile_no || raw?.mobileNo || '',
           parentMobile: basicInfo.parent_mobile || raw?.parentMobile || '',
           personalMail: basicInfo.personal_mail || raw?.personalMail || '',
@@ -951,10 +943,6 @@ function FacultyDashboard() {
             <div className="stat-label">Total Companies</div>
           </div>
           <div className="stat-card">
-            <div className="stat-value">{students.length}</div>
-            <div className="stat-label">Total Students</div>
-          </div>
-          <div className="stat-card">
             <div className="stat-value">
               {companies.filter(c => c.contacts.length > 0).length}
             </div>
@@ -1201,9 +1189,7 @@ function FacultyDashboard() {
               <div className="results-summary">
                 <span>
                     {filteredCompaniesData.length === 0 
-                    ? (students.length > 0
-                      ? "No company groups found yet. Student records are shown below."
-                      : "No companies found matching your filters.")
+                    ? "No companies found matching your filters." 
                     : `Showing ${((currentPage - 1) * itemsPerPage) + 1} to ${Math.min(currentPage * itemsPerPage, filteredCompaniesData.length)} of ${filteredCompaniesData.length} results`
                   }
                 </span>
@@ -1370,45 +1356,6 @@ function FacultyDashboard() {
                     </div>
                   )}
                 </>
-              )}
-
-              {/* Student Records Section */}
-              {students.length > 0 && (
-                <div style={{ marginTop: '30px' }}>
-                  <div className="results-summary" style={{ marginBottom: '16px' }}>
-                    <span>Student Records ({students.length})</span>
-                  </div>
-                  <div className="table-container">
-                    <table className="data-table">
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Roll Number</th>
-                          <th>Branch</th>
-                          <th>Section</th>
-                          <th>Year</th>
-                          <th>Email</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {students.map((student, index) => (
-                          <tr key={student.id || index}>
-                            <td className="td-name">{student.studentName || 'N/A'}</td>
-                            <td>{student.rollNumber || 'N/A'}</td>
-                            <td>{student.branch || 'N/A'}</td>
-                            <td>{student.section || 'N/A'}</td>
-                            <td>{student.year || 'N/A'}</td>
-                            <td>{student.collegeMail || 'N/A'}</td>
-                            <td>
-                              <span className="badge">{(student as any).status || 'submitted'}</span>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
               )}
             </>
           )}

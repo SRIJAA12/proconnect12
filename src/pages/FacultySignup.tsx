@@ -8,7 +8,7 @@ function FacultySignup() {
   const navigate = useNavigate();
   
   // State for form fields
-  const [employeeId, setEmployeeId] = useState('');
+  const [employeeId,setEmployeeId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
