@@ -970,17 +970,6 @@ function FacultyDashboard() {
         <div className="main-filters-section">
           <div className="filter-row">
             <div className="filter-group">
-              <label>Search (Company, Sector, City)</label>
-              <input
-                type="text"
-                className="filter-input"
-                placeholder="Search companies..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-
-            <div className="filter-group">
               <label>Branch</label>
               <div className="autocomplete-container">
                 <input
@@ -1215,86 +1204,92 @@ function FacultyDashboard() {
                 </div>
               </div>
               
-              {/* Table - Only shown if there are results */}
-              {filteredCompaniesData.length > 0 && (
-                <>
-                  <div className="table-container">
-                    <table className="data-table">
-                      <thead>
-                        <tr>
-                          <th>
-                            <div className="th-header">
-                              <span>Company Name</span>
-                            </div>
-                          </th>
-                          <th>
-                            <div className="th-header">
-                              <span>Sector</span>
-                            </div>
-                          </th>
-                          <th>
-                            <div className="th-header">
-                              <span>Work City</span>
-                            </div>
-                          </th>
-                          <th>
-                            <div className="th-header">
-                              <span>Students</span>
-                            </div>
-                          </th>
-                          <th>
-                            <div className="th-header">
-                              <span>Contacts</span>
-                            </div>
-                          </th>
-                          <th>
-                            <div className="th-header">
-                              <span>Actions</span>
-                            </div>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {paginatedCompanies.map((company, index) => (
-                          <tr key={index}>
-                            <td className="td-name">{company.companyName}</td>
-                            <td><span className="badge">{company.sector || 'N/A'}</span></td>
-                            <td>{company.workCity || 'N/A'}</td>
-                            <td className="td-center">
-                              <span className="badge badge-info">
-                                {company.students.length} Student(s)
+              {/* Table - Always visible with headers */}
+              <div className="table-container">
+                <table className="data-table">
+                  <thead>
+                    <tr>
+                      <th>
+                        <div className="th-header">
+                          <span>Company Name</span>
+                        </div>
+                      </th>
+                      <th>
+                        <div className="th-header">
+                          <span>Sector</span>
+                        </div>
+                      </th>
+                      <th>
+                        <div className="th-header">
+                          <span>Work City</span>
+                        </div>
+                      </th>
+                      <th>
+                        <div className="th-header">
+                          <span>Students</span>
+                        </div>
+                      </th>
+                      <th>
+                        <div className="th-header">
+                          <span>Contacts</span>
+                        </div>
+                      </th>
+                      <th>
+                        <div className="th-header">
+                          <span>Actions</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredCompaniesData.length > 0 ? (
+                      paginatedCompanies.map((company, index) => (
+                        <tr key={index}>
+                          <td className="td-name">{company.companyName}</td>
+                          <td><span className="badge">{company.sector || 'N/A'}</span></td>
+                          <td>{company.workCity || 'N/A'}</td>
+                          <td className="td-center">
+                            <span className="badge badge-info">
+                              {company.students.length} Student(s)
+                            </span>
+                          </td>
+                          <td className="td-center">
+                            {company.contacts.length > 0 ? (
+                              <span className="badge badge-success">
+                                {company.contacts.length} Contact(s)
                               </span>
-                            </td>
-                            <td className="td-center">
-                              {company.contacts.length > 0 ? (
-                                <span className="badge badge-success">
-                                  {company.contacts.length} Contact(s)
-                                </span>
-                              ) : (
-                                <span className="badge badge-gray">None</span>
-                              )}
-                            </td>
-                            <td>
-                              <div className="action-buttons">
-                                <button
-                                  className="btn-view"
-                                  onClick={() => handleViewDetails(company)}
-                                >
-                                  View
-                                </button>
-                                <button
-                                  className="btn-delete"
-                                  onClick={() => handleDeleteCompany(company.companyName)}
-                                >
-                                  Delete
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                            ) : (
+                              <span className="badge badge-gray">None</span>
+                            )}
+                          </td>
+                          <td>
+                            <div className="action-buttons">
+                              <button
+                                className="btn-view"
+                                onClick={() => handleViewDetails(company)}
+                              >
+                                View
+                              </button>
+                              <button
+                                className="btn-delete"
+                                onClick={() => handleDeleteCompany(company.companyName)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={6} style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+                          No companies found matching your filters.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
                   
                   {/* Pagination Controls */}
                   {totalPages > 1 && (
@@ -1355,8 +1350,6 @@ function FacultyDashboard() {
                       </button>
                     </div>
                   )}
-                </>
-              )}
             </>
           )}
         </div>

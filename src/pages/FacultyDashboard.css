@@ -336,6 +336,30 @@
   margin-bottom: 20px;
 }
 
+/* Main filters row layout - align inputs consistently */
+.main-filters-section .filter-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.main-filters-section .filter-row .filter-group {
+  flex: 1 1 0;
+  min-width: 200px;
+}
+
+/* Make the third filter (Has Professional Contacts) a fixed smaller width */
+.main-filters-section .filter-row .filter-group:nth-child(3) {
+  flex: 0 0 220px;
+}
+
+/* Ensure inputs and selects expand to full width of their group */
+.main-filters-section .filter-row .filter-group .filter-input,
+.main-filters-section .filter-row .filter-group .filter-select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 
 .dashboard-error-banner {
   background: #fff3cd;
