@@ -67,6 +67,77 @@ function FacultyDashboard() {
   }, [navigate]);
 
   // Extract companies from student data
+  const extractCompanyName = (profile: any): string => {
+    const candidates = [profile?.company, profile?.organizationName, profile?.businessName];
+    const company = candidates.find((value) => typeof value === 'string' && value.trim());
+    return company ? company.trim() : '';
+  };
+
+  const hasMeaningfulCompanyName = (companyName: string): boolean => {
+    if (!companyName) return false;
+
+    const normalized = companyName.toLowerCase().trim();
+    const invalidNames = new Set([
+      'na',
+      'n/a',
+      'nil',
+      'none',
+      'not applicable',
+      'self',
+      'self employed',
+      'self-employed',
+      'unemployed',
+      'housewife',
+      'homemaker'
+    ]);
+
+    if (invalidNames.has(normalized)) return false;
+    return normalized.length >= 2;
+  };
+
+  const shouldIncludeProfessionalProfile = (profile: any): boolean => {
+    const companyName = extractCompanyName(profile);
+    const combinedText = [
+      profile?.designation,
+      profile?.sector,
+      profile?.businessIndustry,
+      profile?.occupationType,
+      profile?.occupation,
+      profile?.relationship,
+      profile?.workCity,
+      profile?.city,
+      profile?.officeAddress,
+      companyName
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+
+    const includedKeywords = [
+      'it', 'software', 'developer', 'engineer', 'technology', 'technical', 'cloud', 'devops',
+      'data', 'ai', 'ml', 'cyber', 'network', 'telecom', 'electronics', 'electrical', 'mechanical',
+      'civil', 'industrial', 'manufacturing', 'scientist', 'research', 'r&d', 'laboratory',
+      'ias', 'ips', 'ifs', 'irs', 'police', 'government', 'govt', 'officer', 'public sector',
+      'psu', 'defence', 'defense', 'army', 'navy', 'air force', 'railway', 'bank', 'industry',
+      'corporate', 'company', 'firm', 'startup', 'consulting', 'pharma', 'biotech', 'automotive'
+    ];
+
+    const excludedKeywords = [
+      'agriculture', 'farmer', 'farming', 'farm', 'dairy', 'poultry', 'fishery', 'fisheries',
+      'livestock', 'plantation', 'horticulture'
+    ];
+
+    const hasIncludedKeyword = includedKeywords.some((keyword) => combinedText.includes(keyword));
+    const hasExcludedKeyword = excludedKeywords.some((keyword) => combinedText.includes(keyword));
+    const hasValidCompanyName = hasMeaningfulCompanyName(companyName);
+
+    if (hasExcludedKeyword && !hasIncludedKeyword) {
+      return false;
+    }
+
+    return hasIncludedKeyword || hasValidCompanyName;
+  };
+
   const extractCompaniesFromStudents = (studentData: Student[]) => {
     const companyMap = new Map();
     
@@ -74,6 +145,10 @@ function FacultyDashboard() {
       // Extract from relatives in IT
       if (student.relativesInIT && student.relativesInIT.length > 0) {
         student.relativesInIT.forEach(relative => {
+          if (!shouldIncludeProfessionalProfile(relative)) {
+            return;
+          }
+
           const companyName = relative.company || relative.organizationName || relative.businessName;
           if (companyName && companyName.trim()) {
             const key = companyName.toLowerCase().trim();
@@ -112,6 +187,10 @@ function FacultyDashboard() {
       // Extract from siblings
       if (student.siblings && student.siblings.length > 0) {
         student.siblings.forEach(sibling => {
+          if (!shouldIncludeProfessionalProfile(sibling)) {
+            return;
+          }
+
           const companyName = sibling.company || sibling.organizationName || sibling.businessName;
           if (companyName && companyName.trim()) {
             const key = companyName.toLowerCase().trim();
@@ -151,6 +230,10 @@ function FacultyDashboard() {
       if (student.parents) {
         // Father
         if (student.parents.father && student.parents.father.status === 'alive') {
+          if (!shouldIncludeProfessionalProfile(student.parents.father)) {
+            return;
+          }
+
           const companyName = student.parents.father.organizationName || student.parents.father.businessName;
           if (companyName && companyName.trim()) {
             const key = companyName.toLowerCase().trim();
@@ -187,6 +270,10 @@ function FacultyDashboard() {
         
         // Mother
         if (student.parents.mother && student.parents.mother.status === 'alive') {
+          if (!shouldIncludeProfessionalProfile(student.parents.mother)) {
+            return;
+          }
+
           const companyName = student.parents.mother.organizationName || student.parents.mother.businessName;
           if (companyName && companyName.trim()) {
             const key = companyName.toLowerCase().trim();
@@ -223,6 +310,10 @@ function FacultyDashboard() {
         
         // Guardian
         if (student.parents.guardian && student.parents.guardian.status === 'alive') {
+          if (!shouldIncludeProfessionalProfile(student.parents.guardian)) {
+            return;
+          }
+
           const companyName = student.parents.guardian.organizationName || student.parents.guardian.businessName;
           if (companyName && companyName.trim()) {
             const key = companyName.toLowerCase().trim();
@@ -1392,90 +1483,90 @@ function FacultyDashboard() {
                 </div>
               </section>
 
-              {/* Students Information */}
+              {/* Students and Professional Contacts - sequential mapping */}
               <section className="detail-section">
-                <h3>Associated Students</h3>
-                {selectedCompany.students && selectedCompany.students.length > 0 ? (
+                <h3>Students and Professional Contacts</h3>
+                {Math.max(selectedCompany.students?.length || 0, selectedCompany.contacts?.length || 0) > 0 ? (
                   <div className="students-grid">
-                    {selectedCompany.students.map((student: any, index: number) => (
-                      <div key={index} className="student-card" style={{ marginBottom: index < selectedCompany.students.length - 1 ? '20px' : '0' }}>
-                        <h4 className="student-number">Student {index + 1}</h4>
-                        <div className="detail-grid">
-                          <div className="detail-item">
-                            <span className="detail-label">Name:</span>
-                            <span className="detail-value">{student.name}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Roll Number:</span>
-                            <span className="detail-value">{student.rollNumber}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Branch:</span>
-                            <span className="detail-value">{student.branch}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Section:</span>
-                            <span className="detail-value">{student.section || 'N/A'}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Year:</span>
-                            <span className="detail-value">{student.year}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Mobile:</span>
-                            <span className="detail-value">{student.mobileNo}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Email:</span>
-                            <span className="detail-value">{student.collegeMail}</span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="dashboard-empty">No students associated with this company.</p>
-                )}
-              </section>
+                    {Array.from({ length: Math.max(selectedCompany.students?.length || 0, selectedCompany.contacts?.length || 0) }).map((_, index) => {
+                      const student = selectedCompany.students?.[index];
+                      const contact = selectedCompany.contacts?.[index];
 
-              {/* Professional Contacts Information */}
-              <section className="detail-section">
-                <h3>Professional Contacts</h3>
-                {selectedCompany.contacts && selectedCompany.contacts.length > 0 ? (
-                  <div className="contacts-grid">
-                    {selectedCompany.contacts.map((contact: any, index: number) => (
-                      <div key={index} className="contact-card">
-                        <div className="detail-grid">
-                          <div className="detail-item">
-                            <span className="detail-label">Name:</span>
-                            <span className="detail-value">{contact.name}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Relationship:</span>
-                            <span className="detail-value">{contact.relationship}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Contact Number:</span>
-                            <span className="detail-value">{contact.contactNumber}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">WhatsApp:</span>
-                            <span className="detail-value">{contact.whatsappNumber || 'N/A'}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Designation:</span>
-                            <span className="detail-value">{contact.designation || 'N/A'}</span>
-                          </div>
-                          <div className="detail-item">
-                            <span className="detail-label">Email:</span>
-                            <span className="detail-value">{contact.email || 'N/A'}</span>
-                          </div>
+                      return (
+                        <div key={index} className="student-card" style={{ marginBottom: index < Math.max(selectedCompany.students?.length || 0, selectedCompany.contacts?.length || 0) - 1 ? '20px' : '0' }}>
+                          <h4 className="student-number">Student {index + 1}</h4>
+                          {student ? (
+                            <div className="detail-grid">
+                              <div className="detail-item">
+                                <span className="detail-label">Name:</span>
+                                <span className="detail-value">{student.name}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Roll Number:</span>
+                                <span className="detail-value">{student.rollNumber}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Branch:</span>
+                                <span className="detail-value">{student.branch}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Section:</span>
+                                <span className="detail-value">{student.section || 'N/A'}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Year:</span>
+                                <span className="detail-value">{student.year}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Mobile:</span>
+                                <span className="detail-value">{student.mobileNo}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Email:</span>
+                                <span className="detail-value">{student.collegeMail}</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <p className="dashboard-empty">No student record mapped for this contact.</p>
+                          )}
+
+                          <h4 className="student-number" style={{ marginTop: '16px' }}>Corresponding Professional Contact</h4>
+                          {contact ? (
+                            <div className="detail-grid">
+                              <div className="detail-item">
+                                <span className="detail-label">Name:</span>
+                                <span className="detail-value">{contact.name}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Relationship:</span>
+                                <span className="detail-value">{contact.relationship}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Contact Number:</span>
+                                <span className="detail-value">{contact.contactNumber}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">WhatsApp:</span>
+                                <span className="detail-value">{contact.whatsappNumber || 'N/A'}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Designation:</span>
+                                <span className="detail-value">{contact.designation || 'N/A'}</span>
+                              </div>
+                              <div className="detail-item">
+                                <span className="detail-label">Email:</span>
+                                <span className="detail-value">{contact.email || 'N/A'}</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <p className="dashboard-empty">No professional contact mapped for this student.</p>
+                          )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 ) : (
-                  <p className="dashboard-empty">No professional contacts associated with this company.</p>
+                  <p className="dashboard-empty">No students or professional contacts associated with this company.</p>
                 )}
               </section>
             </div>
